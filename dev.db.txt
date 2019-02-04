@@ -1,3 +1,5 @@
-[Files]
+[Tags]
+destiny.txt = song,bad lyrics,heavy metal
 amir.txt = amir, nice, dog, hairball
 dance.mpv = cool, nice dance, monkey, amir
+

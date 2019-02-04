@@ -1,0 +1,5 @@
+[Tags]
+amir.txt = nice6
+dog = horse
+amir.txt2 = banana2,banana
+
