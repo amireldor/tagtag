@@ -1,0 +1,3 @@
+[Files]
+amir.txt = amir, nice, dog, hairball
+dance.mpv = cool, nice dance, monkey, amir

@@ -1,0 +1,4 @@
+# sorry, I don't got them in my global ignore ATM
+.mypy_cache
+venv
+__pycache__
