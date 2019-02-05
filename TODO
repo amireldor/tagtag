@@ -4,6 +4,8 @@
  [ ] Detect renames with MD5
  [ ] Suggest similar tags based on filename (such as filename-versioned files)
 
+ [ ] Add setup.py and install CLI script
+
 Later:
 
  [ ] Handle huge dirs

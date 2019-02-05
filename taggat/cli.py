@@ -8,7 +8,7 @@ class CommanLineController():
     def main(self):
         self.args = self.parse_args()
         self.db = IniFileDatabase(self.args.db)
-        self.update_tags()
+        self.handle_tags()
         self.db.write()
 
     def parse_args(self):
@@ -23,9 +23,9 @@ class CommanLineController():
         parser.set_defaults(merge=False, remove=False)
         return parser.parse_args()
 
-    def update_tags(self):
+    def handle_tags(self):
         if len(self.args.tags) == 0:
-            print(','.join(self.get_existing_tags()))
+            self.print_tags()
         elif self.args.remove:
             self.remove_tags()
         elif self.args.merge:
@@ -33,16 +33,15 @@ class CommanLineController():
         else:
             self.db.tag(self.args.file, self.args.tags)
 
+    def print_tags(self):
+        print(', '.join(self.get_existing_tags()))
+
     def remove_tags(self):
-        existing_tags = self.get_existing_tags()
         # TODO: support `-r *` to remove all tags
-        filtered_tags = [tag for tag in existing_tags if tag not in self.args.tags]
-        self.db.tag(self.args.file, filtered_tags)
+        self.db.clear_tags(self.args.file, self.args.tags)
 
     def merge_with_existing_tags(self):
-        existing_tags = self.get_existing_tags()
-        final_tags = set([*self.args.tags, *existing_tags])
-        self.db.tag(self.args.file, final_tags)
+        self.db.merge_tags(self.args.file, self.args.tags)
 
     def get_existing_tags(self):
         try:
