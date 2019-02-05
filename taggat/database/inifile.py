@@ -29,6 +29,15 @@ class IniFileDatabase:
     def tag(self, filepath, tags: [str]):
         self.config_parser[self.TAGS_SECTION_NAME][filepath] = ','.join(tags)
 
+    def merge_tags(self, filepath, tags: [str]):
+        existing_tags = self.files[filepath]
+        self.tag(filepath, set(existing_tags + tags))
+
+    def clear_tags(self, filepath, clear_tags: [str]):
+        existing_tags = self.files[filepath]
+        filtered_tags = [tag for tag in existing_tags if tag not in clear_tags]
+        self.tag(filepath, filtered_tags)
+
     @property
     def files(self):
         as_dict = dict(self.config_parser[self.TAGS_SECTION_NAME])
