@@ -1,4 +1,5 @@
  [ ] Show and edit in CLI
+ [ ] Extract all tagging logic from CLI code to somewhere reusable
  [ ] Show and edit in GUI
  [ ] Detect renames with MD5
  [ ] Suggest similar tags based on filename (such as filename-versioned files)

@@ -14,7 +14,7 @@ class CommanLineController():
     def parse_args(self):
         parser = ArgumentParser(description='tag your files using the command-line')
         parser.add_argument("file", help="the file you are tagging")
-        parser.add_argument("tags", help="trailing arguments are the tags", nargs='*')
+        parser.add_argument("tags", help="trailing arguments are the tags. No tags will print existing tags and quit", nargs='*')
         parser.add_argument("-d", "--db", help="the database to write the tags to", default=self.DEFAULT_DB_FILENAME)
         group = parser.add_mutually_exclusive_group()
         group.add_argument('-m', '--merge', help="merge with existing tags", dest='merge', action='store_true')
@@ -24,7 +24,9 @@ class CommanLineController():
         return parser.parse_args()
 
     def update_tags(self):
-        if self.args.remove:
+        if len(self.args.tags) == 0:
+            print(','.join(self.get_existing_tags()))
+        elif self.args.remove:
             self.remove_tags()
         elif self.args.merge:
             self.merge_with_existing_tags()
@@ -33,6 +35,7 @@ class CommanLineController():
 
     def remove_tags(self):
         existing_tags = self.get_existing_tags()
+        # TODO: support `-r *` to remove all tags
         filtered_tags = [tag for tag in existing_tags if tag not in self.args.tags]
         self.db.tag(self.args.file, filtered_tags)
 

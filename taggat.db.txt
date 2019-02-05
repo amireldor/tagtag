@@ -1,5 +1,5 @@
 [Tags]
-amir.txt = nice6
+amir.txt = one,three
 dog = horse
-amir.txt2 = monkey,i,a,am
+amir.txt2 = am,you,a,monkey
 
